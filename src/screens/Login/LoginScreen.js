@@ -49,6 +49,7 @@ const LoginScreen = ({ navigation, route }) => {
                   placeholderTextColor={"#121212"}
                   underlineColorAndroid='transparent'
                   editable={false}
+                  
                   selectTextOnFocus={false}
                 />
               </View>
@@ -75,9 +76,8 @@ const LoginScreen = ({ navigation, route }) => {
           <TouchableOpacity
             style={[cStyles.button, { marginTop: 40 }]}
             activeOpacity={0.8}
-            onPress={handleGetOTP}
-          >
-            <Text style={cStyles.buttonText}>Get OTP</Text>
+            onPress={handleGetOTP}>
+            <Text style={cStyles.buttonText}>Submit</Text>
           </TouchableOpacity>
             <View style={{ marginBottom: height * 0.05, }}></View>
         </View>
@@ -85,7 +85,6 @@ const LoginScreen = ({ navigation, route }) => {
     </KeyboardAvoidingView>
   );
 }
-
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
@@ -109,8 +108,8 @@ const styles = StyleSheet.create({
   },
   inputContainer2: {
     marginRight: 10,
-    borderColor: '#979797',
-    borderWidth: 0.5,
+    borderColor: '#000000',
+    borderWidth: 0.8,
     borderRadius: 14,
     backgroundColor: '#FEFCFC',
     height: 48,
@@ -121,13 +120,13 @@ const styles = StyleSheet.create({
   },
   inputs: {
     padding: 8,
-    color: '#121212',
+    color: '#000000',
     fontFamily: 'Poppins-Medium',
     fontSize: 16,
   },
   inputContainer1: {
     borderColor: colors.inputBorderColor,
-    borderWidth: 0.5,
+    borderWidth: 0.8,
     borderRadius: 14,
     backgroundColor: '#FEFCFC',
     height: 48,

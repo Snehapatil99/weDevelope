@@ -10,8 +10,10 @@ const { width, height } = Dimensions.get('window');
 const GetStarted = ({ navigation }) => {
 
     const handleNext = async () => {
-        console.log('HomePage');
-        navigation.navigate('BottomTab');
+        console.log('TabNavigator');
+        navigation.navigate('HomePage');
+        // navigation.navigate('TabNavigator');
+
     }
 
     return (
@@ -26,11 +28,11 @@ const GetStarted = ({ navigation }) => {
                 <Text style={[cStyles.headerText0BL, { marginTop: height * 0.045, textAlign: 'center', }]}>Welcome to{'\n'}
                     The <Text style={{ color: '#DF1F26', }}>Cheers By United</Text> Family.</Text>
                 <Text style={[cStyles.headerText2BL, styles.centeredText]}>
-                    Your registration has been
+                    Your registration has been{'\n'}
                     verified successfully.
                 </Text>
-                <Text style={[cStyles.headerText2BL, styles.centeredText, { marginTop: height * 0.095, paddingHorizontal: 8, }]}>
-                    Swipe the button below to start
+                <Text style={[cStyles.headerText2BL, styles.centeredText, { marginTop: height * 0.095, paddingHorizontal: 8 }]}>
+                    Swipe the button below to start{'\n'}
                     working with us.
                 </Text>
                 <SwipeButton
@@ -39,9 +41,9 @@ const GetStarted = ({ navigation }) => {
                     swipeSuccessThreshold={70}
                     height={56}
                     width={width / 1.2}
-                    borderRadius={6}
+                    containerStyles={{borderRadius: 3,top:10}}
                     title="Get Started"
-                    titleColor='#FEFCFC'
+                    titleColor='#000000'
                     //titleFontSize={24}
                     titleStyles={{
                         justifyContent: 'center',
@@ -51,14 +53,16 @@ const GetStarted = ({ navigation }) => {
                         fontFamily: 'Poppins-SemiBold',
                         lineHeight: 19
                     }}
-                    containerStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
-                    thumbIconImageSource={thumbIcon}
-                    thumbIconStyles={{ borderRadius: 6 }}
+                    // thumbIconImageSource={thumbIcon}
+                    thumbIconStyles={{ borderRadius:6,height:44,width:44}}
+                     thumbIconWidth={44}
+                    //  thumbIconComponent={height}
+                      
                     onSwipeSuccess={handleNext}
-                    thumbIconBackgroundColor='#FEFCFC'
-                    thumbIconBorderColor='#FEFCFC'
-                    railBorderColor='rgba(255, 255, 255, 0.5)'
-                    railBackgroundColor='#DF1F26'
+                    thumbIconBackgroundColor='#DF1F26'
+                    thumbIconBorderColor='#DF1F26'
+                    railBorderColor='#DF1F26'
+                    railBackgroundColor='white'
                     railFillBackgroundColor='rgba(255, 255, 255, 0.7)'
 
                 />

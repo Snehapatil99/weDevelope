@@ -57,7 +57,7 @@ const CustomDropdown = ({ options, onSelect, selectedValue, placeholder }) => {
                                 <Text style={styles.selectedItemText}>{option.label}</Text>
                                 {selectedValue === option.value && (
                                     <Image
-                                        //source={require('../../assets/img/selected.png')}
+                                        // source={require('../assets/img/Star.png')}
                                         style={styles.selectedItemImage}
                                     />
                                 )}
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     dropdownHeader: {
         flexDirection: 'row',
         alignItems: 'center',
-       borderColor: '#DF1F26',
-        borderWidth: 0.5,
+       borderColor: '#000000',
+        borderWidth: 0.8,
        borderRadius: 6,
         alignSelf: 'center',
         backgroundColor: '#FEFCFC',

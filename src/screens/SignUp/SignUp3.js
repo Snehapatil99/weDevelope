@@ -13,24 +13,40 @@ const SignUp3 = ({ navigation, route }) => {
   const [selectedDriveNo, setSelectedDriveNo] = useState('');
    const [uploadedDocuments, setUploadedDocuments] = useState({});
 
+  // const handleDocumentUpload = async (type) => {
+  //   try {
+  //     const res = await DocumentPicker.pick({
+  //       type: [DocumentPicker.types.allFiles],
+  //     });
+  //     console.log('Document Picker Response:', res); // Debugging line to check response
+  //     setUploadedDocuments((prev) => ({ ...prev, [type]: res[0] }));
+  //     Alert.alert('Success', `Document ${type} uploaded successfully.`);
+  //   } catch (err) {
+  //     if (DocumentPicker.isCancel(err)) {
+  //       Alert.alert('Cancelled', 'Document selection cancelled.');
+  //     } else {
+  //       console.error('Document Picker Error:', err); // Debugging line to check error
+  //       Alert.alert('Error', 'Failed to upload document.');
+  //     }
+  //   }
+  // };
   const handleDocumentUpload = async (type) => {
     try {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
-      console.log('Document Picker Response:', res); // Debugging line to check response
+      console.log('Document Picker Response:', res); 
       setUploadedDocuments((prev) => ({ ...prev, [type]: res[0] }));
       Alert.alert('Success', `Document ${type} uploaded successfully.`);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         Alert.alert('Cancelled', 'Document selection cancelled.');
       } else {
-        console.error('Document Picker Error:', err); // Debugging line to check error
+        console.error('Document Picker Error:', err); 
         Alert.alert('Error', 'Failed to upload document.');
       }
     }
   };
-
   const handleDocumentRemove = (type) => {
     setUploadedDocuments((prev) => {
       const newDocs = { ...prev };
@@ -38,6 +54,14 @@ const SignUp3 = ({ navigation, route }) => {
       return newDocs;
     });
   };
+
+  // const handleDocumentRemove = (type) => {
+  //   setUploadedDocuments((prev) => {
+  //     const newDocs = { ...prev };
+  //     delete newDocs[type];
+  //     return newDocs;
+  //   });
+  // };
 
   const getButtonStyle = (type) => {
     return [
@@ -76,7 +100,7 @@ const SignUp3 = ({ navigation, route }) => {
     
 
           <View style={styles.inputContainerWithLabel}>
-            <Text style={[cStyles.headerText2BL, { marginBottom: 14 }]}>
+            <Text style={[cStyles.headerText2BL, { marginBottom: 11 }]}>
               Driving License No. <Text style={cStyles.requiredIndicator}>*</Text>
             </Text>
             <View style={cStyles.inputContainer1}>
@@ -91,9 +115,8 @@ const SignUp3 = ({ navigation, route }) => {
               />
             </View>
           </View>
-
                   <View style={styles.inputContainerWithLabel}>
-            <Text style={[cStyles.headerText2BL, { marginBottom: 14 }]}>
+            <Text style={[cStyles.headerText2BL, { marginBottom: 11 }]}>
               Upload Driving License <Text style={cStyles.requiredIndicator}>*</Text>
             </Text>
             <TouchableOpacity
@@ -115,7 +138,7 @@ const SignUp3 = ({ navigation, route }) => {
 
 
           <View style={styles.inputContainerWithLabel}>
-            <Text style={[cStyles.headerText2BL, { marginBottom: 14 }]}>
+            <Text style={[cStyles.headerText2BL, { marginBottom: 11 }]}>
               Bike Registration No. <Text style={cStyles.requiredIndicator}>*</Text>
             </Text>
             <View style={cStyles.inputContainer1}>
@@ -132,7 +155,7 @@ const SignUp3 = ({ navigation, route }) => {
           </View>
 
           <View style={styles.inputContainerWithLabel}>
-            <Text style={[cStyles.headerText2BL, { marginBottom: 14 }]}>
+            <Text style={[cStyles.headerText2BL, { marginBottom: 11}]}>
               Upload RC Book <Text style={cStyles.requiredIndicator}>*</Text>
             </Text>
               <TouchableOpacity
@@ -176,6 +199,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingVertical: 10,
+    margin:3,
   },
   inputContainerWithLabel: {
     //marginBottom: 24,

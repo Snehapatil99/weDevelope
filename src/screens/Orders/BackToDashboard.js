@@ -1,109 +1,229 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
+import Row from "../../common/Row";
+import Col from "../../common/Col";
+import cStyles from "../../components/cStyles";
+import { useRoute, useNavigation } from '@react-navigation/native';
 
-const BackToDashBoard = () => {
+const { width, height } = Dimensions.get('window');
+
+const BackToDashBoard = ({ route}) => {
+    const { orderData } = route.params || {};
+    // console.log("Route params:", route.params); 
+    const navigation = useNavigation();
+    // const route = useRoute();
+    // const did = route.params.did;
+    
     return (
-        <View style={{ margin: 20, flex: 1 }}>
-            <View style={{marginVertical:20}}>
+        <View style={styles.container}>
+            <View style={styles.imageContainer}>
                 <Image source={require('../../assets/img/DeliveryComplted.png')}
-                    resizeMode="contain" style={styles.rightTickimage} ></Image>
-                <Text style={styles.deliveryComplteText}>Great Job!{'\n'}
-                    Delivery Complete.</Text>
+                    resizeMode="contain" style={styles.rightTickimage} />
+                <Text style={styles.deliveryCompleteText}>Great Job!{'\n'}Delivery Complete.</Text>
             </View>
-            <View style={{ flexDirection: "column" }}>
-                <View style={{ flexDirection: "row" }}>
-                    <Image source={require('../../assets/img/Clock.png')} style={styles.ClockDelivery} resizeMode="contain"></Image>
-                    <Text style={styles.bonusText}>BONUS EARNED!</Text>
-                    <Text style={styles.timeText}>On Time Delivery.</Text>
+            <View style={styles.bonusContainer}>
+                <Row>
+                    <Image source={require('../../assets/img/Clock.png')} style={styles.clockDelivery} resizeMode="contain" />
+                    <Col>
+                        <View style={styles.bonusTextContainer}>
+                            <Text style={styles.bonusText}>BONUS EARNED!</Text>
+                            <Text style={styles.timeText}>On Time Delivery.</Text>
+                        </View>
+                    </Col>
+                </Row>
+            </View>
+            <View style={styles.balanceContainer}>
+                <View style={styles.balanceBox}>
+                    <Text style={styles.balanceEarningText}>
+                        Pocket Balance {'\n'}₹{orderData.pocketbalance}
+                    </Text>
+                    <View style={styles.verticalDivider}></View>
+                    <Text style={styles.balanceEarningText}>
+                        Today's Earning {'\n'}₹{orderData.todayearning}
+                    </Text>
                 </View>
             </View>
-            <View style={{flexDirection:"column"}}>
-                <View style={{flexDirection:"row",justifyContent:"space-between",margin:15,top:15}}>
-                    <Text style={styles.balanceearingText}>Pocket Balance {'\n'}₹320.00</Text>
-                    <Text style={styles.balanceearingText}>Todays Earning {'\n'}₹1,220.00</Text>
+            <View style={styles.detailsContainer}>
+                <View style={styles.line} />
+                <Text style={styles.detailsText}>Details</Text>
+                <View style={styles.line} />
+            </View>
+            <View style={styles.detailBoxContainer}>
+                <View style={styles.detailBox}>
+                    <Row>
+                        <Col>
+                            <Text style={styles.paymentText}>Delivery Time</Text>
+                        </Col>
+                        <Col>
+                            <Text style={styles.paymentText}>{orderData.orderdtls.deliverytime}</Text>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Text style={styles.paymentText}>Payment Mode</Text>
+                        </Col>
+                        <Col>
+                            <Text style={styles.paymentText}>{orderData.orderdtls.paymode}</Text>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Text style={styles.paymentText}>Amount Received</Text>
+                        </Col>
+                        <Col>
+                            <Text style={styles.paymentText}>₹{orderData.orderdtls.amountrecvd}</Text>
+                        </Col>
+                    </Row>
                 </View>
             </View>
-            <Text style={styles.detailsText}>Details</Text>
-            <View style={{flexDirection:"column"}}>
-                <View style={{flexDirection:"row",justifyContent:"space-between",top:50,margin:10}}>
-                    <Text style={styles.paymentText}>Delivery Time {'\n'}Payment Mode{'\n'}Amnt. Received</Text>
-                    <Text style={styles.paymentText}>04 Jul, 2024, 12:13 PM {'\n'}Cash{'\n'}₹320.00</Text>
-                    {/* <Text style={styles.paymentText}></Text> */}
-
-                </View>
-            </View>
-            <Button style={{backgroundColor:"#DF1F26",borderRadius:0,top:90,padding:10}} 
-            mode='contained'><Text style={{color:"#FFFFFF",fontSize:16}}>Back to Dashboard</Text></Button>
+            <TouchableOpacity
+                style={[cStyles.button, { marginBottom: 10, marginTop: height * 0.075 }]}
+                onPress={() => navigation.navigate('HomePage')}
+                activeOpacity={0.8}
+            >
+                <Text style={cStyles.buttonText}>BackToDashBoard</Text>
+            </TouchableOpacity>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-    rightTickimage: {
-        alignItems: "center",
-        alignSelf: "center"
+    container: {
+        flex: 1,
+        backgroundColor: '#FFFFFF',
+        alignItems: 'center', // Center content horizontally
     },
-    deliveryComplteText: {
-        fontWeight: "700",
+    imageContainer: {
+        marginVertical: 20,
+        alignItems: 'center',
+    },
+    rightTickimage: {
+        width: 150,
+        height: 150,
+    },
+    deliveryCompleteText: {
+        fontWeight: "600",
         color: "#000000",
         fontSize: 20,
         fontFamily: 'Poppins-SemiBold',
-        // lineHeight: 20,
-        textAlign: "center"
+        textAlign: "center",
     },
-    ClockDelivery: {
-        left: 30,
-        bottom: 5,
+    bonusContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    clockDelivery: {
         height: 49,
-        width: 147
+        width: 49,
+        marginBottom: 10,
+    },
+    bonusTextContainer: {
+        alignItems: 'center',
     },
     bonusText: {
         fontWeight: "600",
         color: "#1A8A32",
         fontSize: 16,
         fontFamily: 'Poppins-SemiBold',
-        // lineHeight: 20,
-        textAlign: "center",
-        right:5
     },
     timeText: {
         fontWeight: "600",
         color: "#4D4D4D",
-        fontSize: 14,
+        fontSize: 15,
         fontFamily: 'Poppins-SemiBold',
-        lineHeight: 17,
-        textAlign: "center",
-        top: 20,
-        right: 130
+        marginTop: 0,
+        bottom: 4,
     },
-    balanceearingText:{
+    balanceContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginBottom: 30,
+    },
+    balanceBox: {
+        borderWidth: 1,
+        width: '100%', // Make the box responsive to the screen width
+        maxWidth: 324,
+        height: 78,
+        borderRadius: 6,
+        borderColor: "#D9D9D9",
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 15,
+    },
+    verticalDivider: {
+        borderWidth: 0.5,
+        height: 73,
+        borderColor: "#D9D9D9",
+    },
+    balanceEarningText: {
         fontWeight: "600",
         color: "#000000",
-        fontSize: 18,
+        fontSize: 15,
+        lineHeight: 19,
         fontFamily: 'Poppins-SemiBold',
-        // lineHeight: 20,
         textAlign: "center",
-        right:5
     },
-    detailsText:{
+    detailsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 20,
+        justifyContent: 'center',
+    },
+    line: {
+        flex: 1,
+        height: 1,
+        backgroundColor: '#000000',
+        marginHorizontal: 20,
+    },
+    detailsText: {
         fontWeight: "600",
         color: "#000000",
         fontSize: 16,
         fontFamily: 'Poppins-SemiBold',
-        // lineHeight: 20,
         textAlign: "center",
-        top:30
-        
     },
-    paymentText:{
+    detailBoxContainer: {
+        marginBottom: 20,
+        width: '100%', // Make the container responsive to the screen width
+        alignItems: 'center',
+    },
+    detailBox: {
+        borderWidth: 1,
+        width: '100%', // Make the box responsive to the screen width
+        maxWidth: 324,
+        height: 100,
+        borderRadius: 6,
+        borderColor: "#D9D9D9",
+        padding: 10,
+    },
+    paymentText: {
         fontWeight: "600",
         color: "#000000",
         fontSize: 15,
-        fontFamily: 'Poppins-SemiBold',
-        lineHeight: 35,
+        fontFamily: 'Poppins-Medium',
+        lineHeight: 25,
         textAlign: "center",
-        
-    }
+    },
+    backButton: {
+        backgroundColor: "#DF1F26",
+        borderRadius: 6,
+        padding: 10,
+        marginTop: 30,
+        position: "absolute",
+        bottom: 16,
+        alignSelf: 'center',
+        width: width - 55
+    },
+    backButtonText: {
+        color: "#FFFFFF",
+        fontSize: 16,
+        fontFamily: "Poppins-Medium",
+        fontWeight: "600",
+        textAlign: "center",
+        lineHeight: 18
+    },
+});
 
-})
 export default BackToDashBoard;
+
